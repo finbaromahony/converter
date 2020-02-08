@@ -16,21 +16,7 @@ func main() {
 		value: value,
 	}
 	functionToExec := conversion.getFunctionName()
-	executeFunction(functionToExec, conversion.value)
-}
-
-//Decide which conversion to call
-func executeFunction(function string, value float64) {
-	switch function {
-	case "lbsToStone":
-		lbsToStone(value)
-	case "kgToStone":
-		kgToStone(value)
-	case "gramsToStone":
-		gramsToStone(value)
-	case "ozToStone":
-		ozToStone(value)
-	}
+	conversion.executeFunction(functionToExec, conversion.value)
 }
 
 //getParser constructs the argparse.
