@@ -9,11 +9,27 @@ import (
 	"github.com/akamensky/argparse"
 )
 
+type Convert struct {
+	from  string
+	to    string
+	value float64
+}
+
+func (c Convert) getFunctionName() string {
+	functionToExec := strings.Join([]string{c.from, strings.Title(c.to)}, "To")
+	return functionToExec
+}
+
 func main() {
 	fmt.Println("## Conversion program ##")
-	in, out, val := getParser()
-	functionToExec := strings.Join([]string{in, strings.Title(out)}, "To")
-	executeFunction(functionToExec, val)
+	from, to, value := getParser()
+	var conversion = Convert{
+		from:  from,
+		to:    to,
+		value: value,
+	}
+	functionToExec := conversion.getFunctionName()
+	executeFunction(functionToExec, conversion.value)
 }
 
 //Decide which conversion to call
