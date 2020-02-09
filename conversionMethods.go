@@ -17,14 +17,14 @@ var ratesMap = map[string]float64{
 	"kgToStone":    6.35029318,
 	"kgToLbs":      0.45359237,
 	"kgToGrams":    0.001,
-	"kgToOz":       35.2739619,
+	"kgToOz":       0.028349523,
 	"gramsToStone": 6350.29318,
 	"gramsToLbs":   453.59237,
 	"gramsToKg":    1000,
 	"gramsToOz":    28.3495231,
 	"ozToStone":    220,
 	"ozToLbs":      0.0625,
-	"ozToKg":       0.028349523,
+	"ozToKg":       35.2739619,
 	"ozToGrams":    0.035273962,
 }
 
@@ -49,8 +49,8 @@ func genericStoneConversion(value float64, rate float64, rate_name string) (int6
 
 //generic convert to lbs that accepts conversion rate
 func genericUnitConversion(value float64, rate float64, rate_name string) {
-	fmt.Printf("%f", value)
-	fmt.Printf("%f", rate)
+	fmt.Printf("%f\n", value)
+	fmt.Printf("%f\n", rate)
 	new_value := value / rate
 	fmt.Printf("%v = %v %s\n", value, toTwoDecimals(new_value), rate_name)
 	fmt.Printf("%v = %v %s\n", value, new_value, rate_name)
