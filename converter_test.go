@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -29,8 +28,38 @@ func TestGenericStoneConversion(t *testing.T) {
 			)
 		}
 	}
+}
 
-	value, remainder := genericStoneConversion(5, 5, "string")
-	fmt.Println(value)
-	fmt.Println(remainder)
+func TestGenericConversion(t *testing.T) {
+	tables := []struct {
+		value          float64
+		rate           float64
+		rate_name      string
+		float64_result float64
+	}{
+		{500, ratesMap["stoneToLbs"], "stoneToLbs", 7000},
+		{500, ratesMap["stoneToKg"], "stoneToKg", 3175.15},
+		{500, ratesMap["stoneToGrams"], "stoneToGrams", 3.175e+6},
+		{500, ratesMap["stoneToOz"], "stoneToOz", 112000},
+		{500, ratesMap["lbsToKg"], "lbsToKg", 226.796},
+		{500, ratesMap["lbsToGrams"], "lbsToGrams", 226796},
+		{500, ratesMap["lbsToOz"], "lbsToOz", 8000},
+		{500, ratesMap["kgToLbs"], "kgToLbs", 1102.31},
+		{500, ratesMap["kgToGrams"], "kgToGrams", 500000},
+		{500, ratesMap["kgToOz"], "kgToOz", 17637},
+		{500, ratesMap["gramsToLbs"], "gramsToLbs", 1.10231},
+		{500, ratesMap["gramsToKg"], "gramsToKg", 0.5},
+		{500, ratesMap["gramsToOz"], "gramsToOz", 17.637},
+		{500, ratesMap["ozToLbs"], "ozToLbs", 31.25},
+		{500, ratesMap["ozToKg"], "ozToKg", 14.1748},
+		{500, ratesMap["ozToGrams"], "ozToGrams", 14174.8},
+	}
+	for _, table := range tables {
+		result := genericUnitConversion(table.value, table.rate, table.rate_name)
+		if result != table.value {
+			t.Errorf(
+				"%s Value of (%v/%v) did not match %v actually got %v", table.rate_name, table.value, table.rate, table.float64_result, result,
+			)
+		}
+	}
 }
